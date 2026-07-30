@@ -21,6 +21,16 @@ Also runs implicitly as a self-gate right after generating any UI, before showin
 
 ## What it does
 
+```mermaid
+flowchart TD
+    A[Read UI file or directory] --> B[Score 7 categories, 0-100]
+    B --> C[Fix list ordered by score gain]
+    C --> D{Score >= 80?}
+    D -- no --> E[Apply fixes, re-score]
+    E --> B
+    D -- yes --> F[Ship checklist, pass/fail only]
+```
+
 - Scores seven weighted categories — coherence, color discipline, hierarchy/typography, layout/spacing, states, UX writing, motion/polish — each starting at full marks with cited, line-numbered deductions
 - Returns fixes ordered by score gain, so the highest-leverage change comes first
 - Runs a separate pass/fail ship checklist (favicon, alt text, semantic HTML, 404, form validation) that doesn't affect the score
